@@ -1,6 +1,6 @@
 {
   "name": "create-samrose-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI to scaffold production-ready Next.js apps with your preferred stack",
   "type": "module",
   "bin": {
