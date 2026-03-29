@@ -5,6 +5,7 @@ import {
   multiselect,
   outro,
   select,
+  text,
 } from "@clack/prompts";
 import type { APIs, UserChoices } from "./types.js";
 import type {
@@ -29,6 +30,17 @@ const handleCancel = <T>(value: T | symbol): T => {
 export const promptUser = async (): Promise<UserChoices> => {
   intro("Setup your stack 🚀");
 
+  const projectTextResult = await text({
+    message: "Enter your project name",
+    placeholder: "my-awesome-project",
+    validate(value) {
+      if (!value?.trim()) return "Project name cannot be empty.";
+      if (!/^[a-z0-9-_]+$/.test(value))
+        return "Use only lowercase letters, numbers, hyphens, and underscores.";
+    },
+  });
+  handleCancel(projectTextResult);
+  const projectName = projectTextResult as string;
   const ormResult = await select({
     message: "Choose ORM",
     options: [
@@ -130,6 +142,7 @@ export const promptUser = async (): Promise<UserChoices> => {
   outro("All set! 🎉");
 
   return {
+    projectName,
     orm,
     database,
     authentication,
