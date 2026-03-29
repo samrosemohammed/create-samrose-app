@@ -1,48 +1,33 @@
 {
   "name": "create-samrose-app",
-  "version": "0.1.1",
-  "description": "A CLI to scaffold production-ready Next.js apps with your preferred stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "type": "module",
-  "bin": {
-    "create-samrose-app": "./dist/index.js"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup",
-    "dev": "tsup --watch",
-    "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "dev": "tsx --watch",
+    "start": "tsx src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samrosemohammed/create-samrose-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samrosemohammed/create-samrose-app/issues"
+  },
+  "homepage": "https://github.com/samrosemohammed/create-samrose-app#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
   },
   "dependencies": {
-    "@clack/prompts": "^0.9.0",
-    "chalk": "^5.3.0",
-    "execa": "^9.3.0",
-    "fs-extra": "^11.2.0",
-    "ora": "^8.1.0",
-    "picocolors": "^1.1.0"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.0.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.4.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": [
-    "cli",
-    "nextjs",
-    "scaffold",
-    "starter",
-    "create-app",
-    "drizzle",
-    "prisma",
-    "tailwind",
-    "shadcn"
-  ],
-  "license": "MIT"
+    "@clack/prompts": "^1.1.0"
+  }
 }
