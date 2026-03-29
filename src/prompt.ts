@@ -6,7 +6,7 @@ import {
   outro,
   select,
 } from "@clack/prompts";
-import type { UserChoices } from "./types.js";
+import type { APIs, UserChoices } from "./types.js";
 import type {
   ORM,
   Database,
@@ -82,6 +82,18 @@ export const promptUser = async (): Promise<UserChoices> => {
   handleCancel(stateManagementResult);
   const stateManagement = stateManagementResult as StateManagement;
 
+  const apisResult = await select({
+    message: "Choose API Type",
+    options: [
+      { value: "trpc", label: "tRPC" },
+      { value: "orpc", label: "oRPC" },
+      { value: "graphql", label: "GraphQL" },
+      { value: "rest", label: "REST" },
+    ],
+  });
+  handleCancel(apisResult);
+  const apis = apisResult as APIs;
+
   const packageManagerResult = await select({
     message: "Choose Package Manager",
     options: [
@@ -123,6 +135,7 @@ export const promptUser = async (): Promise<UserChoices> => {
     authentication,
     componentLibrary,
     stateManagement,
+    apis,
     packageManager,
     testing,
     extra,
