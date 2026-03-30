@@ -1,6 +1,7 @@
 import { promptUser } from "./prompt.js";
 import { setupNextjsProject } from "./setup-nextjs.js";
 import { setupOrm } from "./setup-orm.js";
+import { setupDatabase } from "./setup-database.js";
 
 async function main() {
   try {
@@ -13,7 +14,10 @@ async function main() {
     // Step 3 – set up the selected ORM
     await setupOrm(choices);
 
-    // Step 4 – (future steps go here)
+    // Step 4 – set up the database (docker-compose + env vars)
+    await setupDatabase(choices);
+
+    // Step 5 – (future steps go here)
     // e.g. await setupAuth(choices);
     //      await setupStateManagement(choices);
     //      ...
