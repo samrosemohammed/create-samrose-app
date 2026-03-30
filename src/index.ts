@@ -1,5 +1,6 @@
 import { promptUser } from "./prompt.js";
 import { setupNextjsProject } from "./setup-nextjs.js";
+import { setupOrm } from "./setup-orm.js";
 
 async function main() {
   try {
@@ -9,9 +10,11 @@ async function main() {
     // Step 2 – scaffold the Next.js project
     await setupNextjsProject(choices);
 
-    // Step 3 – (future steps go here)
-    // e.g. await setupOrm(choices);
-    //      await setupAuth(choices);
+    // Step 3 – set up the selected ORM
+    await setupOrm(choices);
+
+    // Step 4 – (future steps go here)
+    // e.g. await setupAuth(choices);
     //      await setupStateManagement(choices);
     //      ...
   } catch (err) {
