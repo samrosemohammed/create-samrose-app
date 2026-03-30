@@ -3,6 +3,7 @@ import { setupNextjsProject } from "./setup-nextjs.js";
 import { setupOrm } from "./setup-orm.js";
 import { setupDatabase } from "./setup-database.js";
 import { setupAuth } from "./setup-auth.js";
+import { setupShadcn } from "./setup-shadcn.js";
 
 async function main() {
   try {
@@ -21,7 +22,10 @@ async function main() {
     // Step 5 – set up authentication
     await setupAuth(choices);
 
-    // Step 6 – (future steps go here)
+    // Step 6 – set up shadcn/ui (if selected)
+    await setupShadcn(choices);
+
+    // Step 7 – (future steps go here)
     // e.g. await setupStateManagement(choices);
     //      await setupApi(choices);
     //      ...
