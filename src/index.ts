@@ -5,6 +5,8 @@ import { setupDatabase } from "./setup-database.js";
 import { setupAuth } from "./setup-auth.js";
 import { setupShadcn } from "./setup-shadcn.js";
 import { setupStateManagement } from "./setup-state-management.js";
+import { setupApis } from "./setup-apis.js";
+import { setupTesting } from "./setup-testing.js";
 
 async function main() {
   try {
@@ -29,9 +31,13 @@ async function main() {
     // Step 7 – set up state management
     await setupStateManagement(choices);
 
-    // Step 8 – (future steps go here)
-    // e.g. await setupApi(choices);
-    //      await setupTesting(choices);
+    // Step 8 – set up API layer
+    await setupApis(choices);
+
+    // Step 9 – set up testing framework
+    await setupTesting(choices);
+
+    // Step 10 – (future steps go here)
     //      ...
   } catch (err) {
     console.error(err);
