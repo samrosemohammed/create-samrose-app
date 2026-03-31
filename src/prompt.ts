@@ -1,5 +1,6 @@
 import {
   cancel,
+  confirm,
   intro,
   isCancel,
   multiselect,
@@ -12,7 +13,6 @@ import type {
   ORM,
   Database,
   Authentication,
-  ComponentLibrary,
   StateManagement,
   PackageManager,
   Testing,
@@ -41,6 +41,7 @@ export const promptUser = async (): Promise<UserChoices> => {
   });
   handleCancel(projectTextResult);
   const projectName = projectTextResult as string;
+
   const ormResult = await select({
     message: "Choose ORM",
     options: [
@@ -76,12 +77,12 @@ export const promptUser = async (): Promise<UserChoices> => {
   handleCancel(authenticationResult);
   const authentication = authenticationResult as Authentication;
 
-  const componentLibraryResult = await select({
-    message: "Choose Component Library",
-    options: [{ value: "shadcn", label: "shadcn/ui" }],
+  const useShadcnResult = await confirm({
+    message: "Use shadcn/ui as your component library?",
+    initialValue: true,
   });
-  handleCancel(componentLibraryResult);
-  const componentLibrary = componentLibraryResult as ComponentLibrary;
+  handleCancel(useShadcnResult);
+  const useShadcn = useShadcnResult as boolean;
 
   const stateManagementResult = await select({
     message: "Choose State Management",
@@ -146,7 +147,7 @@ export const promptUser = async (): Promise<UserChoices> => {
     orm,
     database,
     authentication,
-    componentLibrary,
+    useShadcn,
     stateManagement,
     apis,
     packageManager,

@@ -2,7 +2,6 @@ export type ProjectName = string;
 export type ORM = "prisma" | "drizzle" | "typeorm" | "mongoose";
 export type Database = "postgresql" | "mysql" | "sqlite" | "mongodb";
 export type Authentication = "nextauth" | "clerk" | "jwt";
-export type ComponentLibrary = "shadcn";
 export type StateManagement = "zustand" | "redux" | "recoil";
 export type APIs = "trpc" | "orpc" | "graphql" | "rest";
 export type PackageManager = "npm" | "yarn" | "pnpm" | "bun";
@@ -14,7 +13,7 @@ export interface UserChoices {
   orm: ORM;
   database: Database;
   authentication: Authentication;
-  componentLibrary: ComponentLibrary;
+  useShadcn: boolean; // true = install shadcn/ui, false = skip
   stateManagement: StateManagement;
   apis: APIs;
   packageManager: PackageManager;
