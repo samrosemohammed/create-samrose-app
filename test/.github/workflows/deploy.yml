@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    needs: []  # Add 'ci' here once CI workflow is confirmed stable
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ─────────────────────────────────────────────
+      # Choose ONE of the deployment targets below
+      # and delete the others.
+      # ─────────────────────────────────────────────
+
+      # Option A: Vercel
+      # - name: Deploy to Vercel
+      #   uses: amondnet/vercel-action@v25
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      #     vercel-args: "--prod"
+
+      # Option B: Docker → push to GHCR then deploy via SSH
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     push: true
+      #     tags: ghcr.io/${{ github.repository }}:latest
+
+      - name: Placeholder — add your deployment step above
+        run: echo "Configure a deployment target in .github/workflows/deploy.yml"

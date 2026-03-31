@@ -7,7 +7,7 @@ import { setupShadcn } from "./setup-shadcn.js";
 import { setupStateManagement } from "./setup-state-management.js";
 import { setupApis } from "./setup-apis.js";
 import { setupTestingFramework } from "./setup-testing-framework.js";
-import { setupExtraTools } from "./setup-extra-tools.js";
+import { setupExtras } from "./setup-extras.js";
 
 async function main() {
   try {
@@ -39,7 +39,7 @@ async function main() {
     await setupTestingFramework(choices);
 
     // Step 10 – set up extra tools
-    await setupExtraTools(choices);
+    await setupExtras(choices);
 
     // Step 11 – (future steps go here)
     //      ...
