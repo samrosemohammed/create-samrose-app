@@ -5,6 +5,7 @@ import { setupDatabase } from "./setup-database.js";
 import { setupAuth } from "./setup-auth.js";
 import { setupShadcn } from "./setup-shadcn.js";
 import { setupStateManagement } from "./setup-state-management.js";
+import { setupExtras } from "./setup-extras.js";
 import { setupApi } from "./setup-api.js";
 import { setupTesting } from "./setup-testing.js";
 
@@ -37,7 +38,10 @@ async function main() {
     // Step 9 – set up testing framework
     await setupTesting(choices);
 
-    // Step 10 – (future steps go here)
+    // Step 10 – set up extra tools
+    await setupExtras(choices);
+
+    // Step 11 – (future steps go here)
     //      ...
   } catch (err) {
     console.error(err);
