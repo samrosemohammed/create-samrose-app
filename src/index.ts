@@ -6,7 +6,7 @@ import { setupAuth } from "./setup-auth.js";
 import { setupShadcn } from "./setup-shadcn.js";
 import { setupStateManagement } from "./setup-state-management.js";
 import { setupApis } from "./setup-apis.js";
-import { setupTestingFramework } from "./setup-testing-framework.js";
+import { setupTesting } from "./setup-testing.js";
 
 async function main() {
   try {
@@ -35,7 +35,7 @@ async function main() {
     await setupApis(choices);
 
     // Step 9 – set up testing framework
-    await setupTestingFramework(choices);
+    await setupTesting(choices);
 
     // Step 10 – (future steps go here)
     //      ...
