@@ -4,6 +4,7 @@ import { setupOrm } from "./setup-orm.js";
 import { setupDatabase } from "./setup-database.js";
 import { setupAuth } from "./setup-auth.js";
 import { setupShadcn } from "./setup-shadcn.js";
+import { setupStateManagement } from "./setup-state-management.js";
 
 async function main() {
   try {
@@ -25,9 +26,12 @@ async function main() {
     // Step 6 – set up shadcn/ui (if selected)
     await setupShadcn(choices);
 
-    // Step 7 – (future steps go here)
-    // e.g. await setupStateManagement(choices);
-    //      await setupApi(choices);
+    // Step 7 – set up state management
+    await setupStateManagement(choices);
+
+    // Step 8 – (future steps go here)
+    // e.g. await setupApi(choices);
+    //      await setupTesting(choices);
     //      ...
   } catch (err) {
     console.error(err);
