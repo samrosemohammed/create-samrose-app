@@ -1,20 +1,36 @@
 {
   "name": "create-samrose-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "description": "CLI to scaffold opinionated Next.js projects with your preferred stack",
+  "main": "./dist/index.js",
+  "bin": {
+    "create-samrose-app": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup",
     "dev": "tsx --watch",
-    "start": "tsx src/index.ts"
+    "start": "tsx src/index.ts",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/samrosemohammed/create-samrose-app.git"
   },
-  "keywords": [],
+  "keywords": [
+    "create-next-app",
+    "nextjs",
+    "scaffold",
+    "cli",
+    "boilerplate"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
