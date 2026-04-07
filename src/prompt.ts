@@ -14,7 +14,6 @@ import type {
   Database,
   Authentication,
   StateManagement,
-  PackageManager,
   Testing,
   Extra,
 } from "./types.js";
@@ -26,6 +25,15 @@ const handleCancel = <T>(value: T | symbol): T => {
   }
   return value as T;
 };
+
+function detectPackageManager(): UserChoices["packageManager"] {
+  const userAgent = process.env.npm_config_user_agent?.toLowerCase() ?? "";
+
+  if (userAgent.startsWith("pnpm/")) return "pnpm";
+  if (userAgent.startsWith("yarn/")) return "yarn";
+  if (userAgent.startsWith("bun/")) return "bun";
+  return "npm";
+}
 
 export const promptUser = async (): Promise<UserChoices> => {
   intro("Setup your stack 🚀");
@@ -107,17 +115,8 @@ export const promptUser = async (): Promise<UserChoices> => {
   handleCancel(apisResult);
   const apis = apisResult as APIs;
 
-  const packageManagerResult = await select({
-    message: "Choose Package Manager",
-    options: [
-      { value: "npm", label: "npm" },
-      { value: "yarn", label: "yarn" },
-      { value: "pnpm", label: "pnpm" },
-      { value: "bun", label: "bun" },
-    ],
-  });
-  handleCancel(packageManagerResult);
-  const packageManager = packageManagerResult as PackageManager;
+  const packageManager = detectPackageManager();
+  console.log(`\n📦 Using package manager: ${packageManager}`);
 
   const testingResult = await select({
     message: "Choose Testing Framework",
