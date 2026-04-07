@@ -36,11 +36,11 @@ pnpm create samrose-app@latest
 ```
 
 ```bash
-yarn create samrose-app
+yarn create samrose-app@latest
 ```
 
 ```bash
-bun create samrose-app
+bunx create-samrose-app@latest
 ```
 
 You will be prompted to choose your preferred stack.
