@@ -19,7 +19,7 @@ Starting a Next.js app is easy. Starting it with the full stack you actually wan
 - Auth setup: NextAuth, Clerk, or JWT scaffold
 - API layer setup: tRPC, oRPC, GraphQL, or REST scaffold
 - State management setup: Zustand, Redux Toolkit, or Recoil
-- Testing setup: Jest or Vitest with sensible defaults
+- Testing setup: Jest, Vitest, or Playwright with sensible defaults
 - Optional extras: Docker, GitHub Actions, Husky
 - Package manager detection: npm, pnpm, yarn, bun
 
@@ -103,6 +103,7 @@ create-samrose-app
 
 - Jest
 - Vitest
+- Playwright (E2E)
 
 ### Extras
 

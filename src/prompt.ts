@@ -123,6 +123,7 @@ export const promptUser = async (): Promise<UserChoices> => {
     options: [
       { value: "jest", label: "Jest" },
       { value: "vitest", label: "Vitest" },
+      { value: "playwright", label: "Playwright (E2E)" },
     ],
   });
   handleCancel(testingResult);
