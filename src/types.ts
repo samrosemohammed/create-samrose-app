@@ -5,7 +5,7 @@ export type Authentication = "nextauth" | "clerk" | "jwt";
 export type StateManagement = "zustand" | "redux" | "recoil";
 export type APIs = "trpc" | "orpc" | "graphql" | "rest";
 export type PackageManager = "npm" | "yarn" | "pnpm" | "bun";
-export type Testing = "jest" | "vitest";
+export type Testing = "jest" | "vitest" | "playwright";
 export type Extra = "docker" | "github-actions" | "husky";
 
 export interface UserChoices {

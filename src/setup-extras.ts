@@ -251,10 +251,19 @@ async function setupGithubActions(choices: UserChoices, projectDir: string) {
 `
       : "";
 
+  const playwrightInstallStep =
+    testing === "playwright"
+      ? `
+      - name: Install Playwright browsers
+        run: ${packageManager === "npm" ? "npx" : packageManager === "yarn" ? "yarn" : packageManager === "pnpm" ? "pnpm exec" : "bunx"} playwright install --with-deps
+`
+      : "";
+
   // Test command per framework
   const testCmd: Record<UserChoices["testing"], string> = {
     jest: `${packageManager === "npm" ? "npx" : packageManager} jest --ci --coverage`,
     vitest: `${packageManager === "npm" ? "npx" : packageManager} vitest run --coverage`,
+    playwright: `${packageManager === "npm" ? "npx" : packageManager === "yarn" ? "yarn" : packageManager === "pnpm" ? "pnpm exec" : "bunx"} playwright test`,
   };
 
   // CI workflow — lint + type-check + test + build on every push/PR
@@ -301,6 +310,7 @@ ${pnpmSetup}
 
       - name: Lint
         run: ${packageManager === "npm" ? "npx" : packageManager} next lint
+${playwrightInstallStep}
 
       - name: Test
         run: ${testCmd[testing]}

@@ -338,6 +338,90 @@ describe("add utility", () => {
 }
 
 // ─────────────────────────────────────────────
+// PLAYWRIGHT
+// ─────────────────────────────────────────────
+
+async function setupPlaywright(choices: UserChoices, projectDir: string) {
+  const devCommand =
+    choices.packageManager === "npm"
+      ? "npm run dev"
+      : choices.packageManager === "yarn"
+        ? "yarn dev"
+        : choices.packageManager === "pnpm"
+          ? "pnpm dev"
+          : "bun run dev";
+
+  console.log("  📦 Installing Playwright…");
+
+  await install(choices.packageManager, projectDir, ["@playwright/test"]);
+
+  await write(
+    path.join(projectDir, "playwright.config.ts"),
+    `import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./e2e",
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: "html",
+  use: {
+    baseURL: "http://127.0.0.1:3000",
+    trace: "on-first-retry",
+  },
+  webServer: {
+    command: "${devCommand}",
+    url: "http://127.0.0.1:3000",
+    reuseExistingServer: !process.env.CI,
+  },
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+  ],
+});
+`,
+  );
+
+  await write(
+    path.join(projectDir, "e2e", "home.spec.ts"),
+    `import { expect, test } from "@playwright/test";
+
+test("home page loads", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle(/.+/);
+});
+`,
+  );
+
+  await addScripts(projectDir, {
+    test: "playwright test",
+    "test:ci": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:install-browsers": "playwright install --with-deps",
+  });
+
+  console.log("\n  ✅ Playwright ready.");
+  console.log("  📌 One-time setup:");
+  console.log("     npm run test:install-browsers");
+  console.log("  📌 Commands:");
+  console.log("     npm test              — run E2E tests");
+  console.log("     npm run test:ui       — open Playwright UI mode");
+  console.log("     npm run test:headed   — run tests with visible browser\n");
+}
+
+// ─────────────────────────────────────────────
 // Main
 // ─────────────────────────────────────────────
 
@@ -354,6 +438,9 @@ export async function setupTesting(choices: UserChoices): Promise<void> {
         break;
       case "vitest":
         await setupVitest(choices, projectDir);
+        break;
+      case "playwright":
+        await setupPlaywright(choices, projectDir);
         break;
     }
   } catch (error) {
